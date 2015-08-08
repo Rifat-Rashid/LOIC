@@ -1,11 +1,110 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+    android:layout_height="match_parent" android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    android:paddingBottom="0dp" tools:context=".MainActivity"
+    android:background="#191819">
 
-    <TextView android:text="@string/hello_world" android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <EditText
+        android:layout_width="280dp"
+        android:layout_height="33dp"
+        android:id="@+id/editText"
+        android:layout_marginTop="27dp"
+        android:singleLine="true"
+        android:text="http://"
+        android:textColor="#191819"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:background="#d3d3d3" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="-or-"
+        android:id="@+id/textView"
+        android:textColor="#2a2a2a"
+        android:layout_below="@+id/editText"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="33dp"
+        android:text="Get IP"
+        android:id="@+id/button"
+        android:layout_below="@+id/radioButton2"
+        android:layout_alignEnd="@+id/textView2"
+        android:layout_marginTop="79dp" />
+
+    <EditText
+        android:layout_width="280dp"
+        android:layout_height="33dp"
+        android:id="@+id/editText2"
+        android:layout_below="@+id/textView"
+        android:layout_alignStart="@+id/editText"
+        android:textColor="#191819"
+        android:background="#d3d3d3"
+        android:hint="Type IP" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#2a2a2a"
+        android:layout_below="@+id/editText2"
+        android:layout_alignStart="@+id/editText2"
+        android:layout_marginTop="23dp"
+        android:id="@+id/view" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="UDP"
+        android:id="@+id/radioButton"
+        android:textColor="#d3d3d3"
+        android:layout_marginEnd="35dp"
+        android:layout_centerVertical="true"
+        android:layout_toStartOf="@+id/textView" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TCP"
+        android:id="@+id/radioButton2"
+        android:textColor="#D3D3D3"
+        android:layout_alignTop="@+id/radioButton"
+        android:layout_alignEnd="@+id/editText2" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#2a2a2a"
+        android:id="@+id/view1"
+        android:layout_marginBottom="23dp"
+        android:layout_above="@+id/radioButton"
+        android:layout_alignStart="@+id/view" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="IP Unselected"
+        android:id="@+id/textView2"
+        android:layout_above="@+id/view1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="22dp"
+        android:textColor="#d3d3d3" />
+
+    <EditText
+        android:layout_width="65dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/port"
+        android:textColor="#2a2a2a"
+        android:textSize="15dp"
+        android:background="#d3d3d3"
+        android:layout_above="@+id/view"
+        android:layout_alignTop="@+id/editText"
+        android:layout_alignEnd="@+id/view"
+        android:hint="Port"
+        android:lines="1" />
 </RelativeLayout>

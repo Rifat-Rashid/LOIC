@@ -33,9 +33,8 @@
         android:layout_height="33dp"
         android:text="Get IP"
         android:id="@+id/button"
-        android:layout_below="@+id/radioButton2"
-        android:layout_alignEnd="@+id/textView2"
-        android:layout_marginTop="79dp" />
+        android:layout_below="@+id/textView"
+        android:layout_toEndOf="@+id/editText2" />
 
     <EditText
         android:layout_width="280dp"
@@ -96,15 +95,25 @@
         android:textColor="#d3d3d3" />
 
     <EditText
-        android:layout_width="65dp"
+        android:layout_width="76dp"
         android:layout_height="wrap_content"
         android:id="@+id/port"
         android:textColor="#2a2a2a"
         android:textSize="15dp"
         android:background="#d3d3d3"
-        android:layout_above="@+id/view"
+        android:hint="Port"
+        android:lines="1"
+        android:singleLine="true"
         android:layout_alignTop="@+id/editText"
         android:layout_alignEnd="@+id/view"
-        android:hint="Port"
-        android:lines="1" />
+        android:layout_alignBottom="@+id/editText" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#2a2a2a"
+        android:id="@+id/view2"
+        android:layout_below="@+id/radioButton"
+        android:layout_alignStart="@+id/view1"
+        android:layout_marginTop="29dp" />
 </RelativeLayout>

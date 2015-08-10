@@ -4,7 +4,8 @@
     android:paddingRight="0dp"
     android:paddingTop="0dp"
     android:paddingBottom="0dp" tools:context=".MainActivity"
-    android:background="#191819">
+    android:background="#191819"
+    android:id="@+id/">
 
     <EditText
         android:layout_width="280dp"
@@ -150,4 +151,36 @@
         android:layout_above="@+id/port_textbox"
         android:layout_alignStart="@+id/url_textbox"
         android:textColor="#2a2a2a" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#2a2a2a"
+        android:id="@+id/view5"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/view2"
+        android:layout_marginBottom="101dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Packets Sent:"
+        android:id="@+id/textView4"
+        android:textColor="#2a2a2a"
+        android:textSize="27dp"
+        android:layout_above="@+id/view5"
+        android:layout_alignEnd="@+id/textView"
+        android:layout_marginBottom="48dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="00000"
+        android:id="@+id/textView5"
+        android:textSize="27dp"
+        android:layout_alignTop="@+id/textView4"
+        android:layout_toEndOf="@+id/textView"
+        android:textColor="#d3d3d3" />
 </RelativeLayout>

@@ -66,7 +66,7 @@
         android:layout_marginEnd="35dp"
         android:layout_centerVertical="true"
         android:layout_toStartOf="@+id/textView"
-        android:enabled="false"
+        android:enabled="true"
         android:checked="true" />
 
     <RadioButton
@@ -125,7 +125,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Targeted IP"
+        android:text="2. Targeted IP"
         android:id="@+id/suubText1"
         android:layout_alignTop="@+id/view"
         android:layout_alignStart="@+id/view"
@@ -135,9 +135,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Fire Method"
+        android:text="3. Fire Method"
         android:id="@+id/textView3"
         android:layout_below="@+id/ip_text"
         android:layout_alignStart="@+id/view1"
+        android:textColor="#2a2a2a" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="1. Get Target IP"
+        android:id="@+id/textView2"
+        android:layout_above="@+id/port_textbox"
+        android:layout_alignStart="@+id/url_textbox"
         android:textColor="#2a2a2a" />
 </RelativeLayout>

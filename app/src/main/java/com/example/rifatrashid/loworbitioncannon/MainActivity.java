@@ -1,5 +1,7 @@
 package com.example.rifatrashid.loworbitioncannon;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
@@ -35,6 +37,7 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().setElevation(0);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#2a2a2a")));
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         urlText = (EditText) findViewById(R.id.url_textbox);

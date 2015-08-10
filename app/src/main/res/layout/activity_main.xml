@@ -206,4 +206,24 @@
         android:layout_alignBottom="@+id/view5"
         android:layout_toEndOf="@+id/textView5"
         android:textColor="#d3d3d3" />
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:text="Start"
+        android:id="@+id/fireButton"
+        android:layout_below="@+id/packetsPerSecondText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="4. Fire"
+        android:id="@+id/textView6"
+        android:layout_below="@+id/packetsPerSecondText"
+        android:layout_alignParentStart="true"
+        android:textColor="#2a2a2a" />
+
 </RelativeLayout>

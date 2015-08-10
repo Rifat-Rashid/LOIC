@@ -33,6 +33,7 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
     private RadioButton UDPOption, TCPOption;
     private TextView numberOfPacketSentText;
     private TextView packetsPerSecondText;
+    private Button fireButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,7 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
         numberOfPacketSentText.setText(String.valueOf(numberOfPacketsSent));
         packetsPerSecondText = (TextView) findViewById(R.id.packetsPerSecondText);
         packetsPerSecondText.setText("0");
+        fireButton = (Button) findViewById(R.id.fireButton);
         getIPButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

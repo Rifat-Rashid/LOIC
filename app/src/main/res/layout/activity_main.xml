@@ -178,9 +178,29 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="00000"
-        android:id="@+id/textView5"
+        android:id="@+id/packetSentText"
         android:textSize="27dp"
+        android:textColor="#d3d3d3"
         android:layout_alignTop="@+id/textView4"
-        android:layout_toEndOf="@+id/textView"
+        android:layout_toEndOf="@+id/textView" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Packets/sec:"
+        android:id="@+id/textView5"
+        android:textColor="#2a2a2a"
+        android:layout_above="@+id/view5"
+        android:layout_toStartOf="@+id/packetSentText" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="0"
+        android:id="@+id/packetsPerSecondText"
+        android:layout_alignBottom="@+id/view5"
+        android:layout_toEndOf="@+id/textView5"
         android:textColor="#d3d3d3" />
 </RelativeLayout>

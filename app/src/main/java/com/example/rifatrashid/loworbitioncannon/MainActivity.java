@@ -31,6 +31,8 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
     private Integer PORT = null;
     private InetAddress address = null;
     private RadioButton UDPOption, TCPOption;
+    private TextView numberOfPacketSentText;
+    private TextView packetsPerSecondText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +51,10 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
         TCPOption = (RadioButton) findViewById(R.id.tcp_radio);
         UDPOption.setOnCheckedChangeListener(this);
         TCPOption.setOnCheckedChangeListener(this);
+        numberOfPacketSentText = (TextView) findViewById(R.id.packetSentText);
+        numberOfPacketSentText.setText(String.valueOf(numberOfPacketsSent));
+        packetsPerSecondText = (TextView) findViewById(R.id.packetsPerSecondText);
+        packetsPerSecondText.setText("0");
         getIPButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

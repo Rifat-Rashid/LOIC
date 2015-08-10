@@ -9,7 +9,7 @@
     <EditText
         android:layout_width="280dp"
         android:layout_height="33dp"
-        android:id="@+id/editText"
+        android:id="@+id/url_textbox"
         android:layout_marginTop="27dp"
         android:singleLine="true"
         android:text="http://"
@@ -25,7 +25,7 @@
         android:text="-or-"
         android:id="@+id/textView"
         android:textColor="#2a2a2a"
-        android:layout_below="@+id/editText"
+        android:layout_below="@+id/url_textbox"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -33,15 +33,16 @@
         android:layout_height="33dp"
         android:text="Get IP"
         android:id="@+id/button"
-        android:layout_below="@+id/textView"
-        android:layout_toEndOf="@+id/editText2" />
+        android:layout_above="@+id/view"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/ip_textbox" />
 
     <EditText
         android:layout_width="280dp"
         android:layout_height="33dp"
-        android:id="@+id/editText2"
+        android:id="@+id/ip_textbox"
         android:layout_below="@+id/textView"
-        android:layout_alignStart="@+id/editText"
+        android:layout_alignStart="@+id/url_textbox"
         android:textColor="#191819"
         android:background="#d3d3d3"
         android:hint="Type IP" />
@@ -50,16 +51,16 @@
         android:layout_width="fill_parent"
         android:layout_height="1dp"
         android:background="#2a2a2a"
-        android:layout_below="@+id/editText2"
-        android:layout_alignStart="@+id/editText2"
-        android:layout_marginTop="23dp"
-        android:id="@+id/view" />
+        android:id="@+id/view"
+        android:layout_above="@+id/ip_text"
+        android:layout_alignStart="@+id/ip_textbox"
+        android:layout_marginBottom="31dp" />
 
     <RadioButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="UDP"
-        android:id="@+id/radioButton"
+        android:id="@+id/udp_radio"
         android:textColor="#d3d3d3"
         android:layout_marginEnd="35dp"
         android:layout_centerVertical="true"
@@ -69,10 +70,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TCP"
-        android:id="@+id/radioButton2"
+        android:id="@+id/tcp_radio"
         android:textColor="#D3D3D3"
-        android:layout_alignTop="@+id/radioButton"
-        android:layout_alignEnd="@+id/editText2" />
+        android:layout_alignTop="@+id/udp_radio"
+        android:layout_alignEnd="@+id/ip_textbox" />
 
     <View
         android:layout_width="fill_parent"
@@ -80,7 +81,7 @@
         android:background="#2a2a2a"
         android:id="@+id/view1"
         android:layout_marginBottom="23dp"
-        android:layout_above="@+id/radioButton"
+        android:layout_above="@+id/udp_radio"
         android:layout_alignStart="@+id/view" />
 
     <TextView
@@ -88,7 +89,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="IP Unselected"
-        android:id="@+id/textView2"
+        android:id="@+id/ip_text"
         android:layout_above="@+id/view1"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="22dp"
@@ -97,23 +98,43 @@
     <EditText
         android:layout_width="76dp"
         android:layout_height="wrap_content"
-        android:id="@+id/port"
+        android:id="@+id/port_textbox"
         android:textColor="#2a2a2a"
         android:textSize="15dp"
         android:background="#d3d3d3"
         android:hint="Port"
         android:lines="1"
         android:singleLine="true"
-        android:layout_alignTop="@+id/editText"
+        android:layout_alignTop="@+id/url_textbox"
         android:layout_alignEnd="@+id/view"
-        android:layout_alignBottom="@+id/editText" />
+        android:layout_alignBottom="@+id/url_textbox" />
 
     <View
         android:layout_width="fill_parent"
         android:layout_height="1dp"
         android:background="#2a2a2a"
         android:id="@+id/view2"
-        android:layout_below="@+id/radioButton"
+        android:layout_below="@+id/udp_radio"
         android:layout_alignStart="@+id/view1"
         android:layout_marginTop="29dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Targeted IP"
+        android:id="@+id/suubText1"
+        android:layout_alignTop="@+id/view"
+        android:layout_alignStart="@+id/view"
+        android:textColor="#2a2a2a" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Fire Method"
+        android:id="@+id/textView3"
+        android:layout_below="@+id/ip_text"
+        android:layout_alignStart="@+id/view1"
+        android:textColor="#2a2a2a" />
 </RelativeLayout>

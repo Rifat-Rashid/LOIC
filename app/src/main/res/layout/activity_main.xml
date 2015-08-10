@@ -12,11 +12,12 @@
         android:id="@+id/url_textbox"
         android:layout_marginTop="27dp"
         android:singleLine="true"
-        android:text="http://"
         android:textColor="#191819"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:background="#d3d3d3" />
+        android:background="#d3d3d3"
+        android:hint="Website URL"
+        android:text="http://" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -32,7 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="33dp"
         android:text="Get IP"
-        android:id="@+id/button"
+        android:id="@+id/getIp"
         android:layout_above="@+id/view"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/ip_textbox" />
@@ -64,7 +65,9 @@
         android:textColor="#d3d3d3"
         android:layout_marginEnd="35dp"
         android:layout_centerVertical="true"
-        android:layout_toStartOf="@+id/textView" />
+        android:layout_toStartOf="@+id/textView"
+        android:enabled="false"
+        android:checked="true" />
 
     <RadioButton
         android:layout_width="wrap_content"

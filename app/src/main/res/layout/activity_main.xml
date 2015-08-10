@@ -5,7 +5,7 @@
     android:paddingTop="0dp"
     android:paddingBottom="0dp" tools:context=".MainActivity"
     android:background="#191819"
-    android:id="@+id/">
+    android:id="@+id/aka">
 
     <EditText
         android:layout_width="280dp"

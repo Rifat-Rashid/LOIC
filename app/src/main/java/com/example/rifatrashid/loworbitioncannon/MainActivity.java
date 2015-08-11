@@ -134,15 +134,21 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
                 }
             }
         });
-        runOnUiThread(new Runnable() {
+        Runnable r = new Runnable() {
             @Override
             public void run() {
                 while(isFiring){
-                    numberOfPacketSentText.setText(String.valueOf(numberOfPacketsSent));
+                    MainActivity.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            numberOfPacketSentText.setText(String.valueOf(numberOfPacketsSent));
+                        }
+                    });
                 }
             }
-        });
+        };
 
+        new Thread(r).start();
     }
 
     public void initialize() throws MalformedURLException, UnknownHostException {

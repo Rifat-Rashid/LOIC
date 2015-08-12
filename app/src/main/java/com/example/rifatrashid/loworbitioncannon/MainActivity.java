@@ -12,10 +12,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import java.io.IOException;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
-import java.net.SocketException;
 import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.regex.Pattern;
@@ -42,6 +40,7 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
     private Integer tempCount = 0;
     private byte[] sendingBytes = new byte[65100];
     private boolean runOnce = false;
+    private managerClass services;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +58,7 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
         TCPOption = (RadioButton) findViewById(R.id.tcp_radio);
         UDPOption.setOnCheckedChangeListener(this);
         TCPOption.setOnCheckedChangeListener(this);
+        services = new managerClass();
         numberOfPacketSentText = (TextView) findViewById(R.id.packetSentText);
         numberOfPacketSentText.setText(String.valueOf(numberOfPacketsSent));
         packetsPerSecondText = (TextView) findViewById(R.id.packetsPerSecondText);
@@ -88,11 +88,42 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
         fireButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!managerClass.firing) {
+                    if (UDPOption.isChecked() == true) {
+                        if (portText.getText() != null) {
+                            if (Pattern.matches("[a-zA-Z]+", portText.getText()) == false) {
+                                PORT = Integer.parseInt(String.valueOf(portText.getText()));
+                                try {
+                                    InetAddress realAddress = InetAddress.getByName(address.getHostAddress());
+                                    services.start(realAddress, PORT, 35, sendingBytes);
+                                    fireButton.setText("Stop");
+                                    Runnable r = new Runnable() {
+                                        public void run() {
+                                            while (managerClass.firing) {
+                                                MainActivity.this.runOnUiThread(new Runnable() {
+                                                    public void run() {
+                                                        numberOfPacketSentText.setText(String.valueOf(UDPpacket.count));
+                                                    }
+                                                });
+                                            }
+                                        }
+                                    };
+                                    new Thread(r).start();
+                                } catch (Exception io) {
+
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    services.stop();
+                    fireButton.setText("Start");
+                }
+                /*
                 tempCount++;
                 switch (tempCount) {
                     case 0:
                         fireButton.setText("Start");
-                        isFiring = false;
                         break;
                     case 1:
                         isFiring = true;
@@ -103,17 +134,9 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
                                     PORT = Integer.parseInt(String.valueOf(portText.getText()));
                                     try {
                                         InetAddress realAddress = InetAddress.getByName(address.getHostAddress());
-                                        if (!runOnce) {
-                                            for (int i = 0; i <= 15; i++) {
-                                                udpPacket = new UDPpacket(realAddress, sendingBytes, PORT);
-                                                udpPacket.setStringIP(address.getHostAddress().toString());
-                                                udpPacket.setIsRunning(false);
-                                                udpPacket.sendClient2();
-                                            }
-                                        }
+                                        services.start(realAddress, Integer.parseInt(String.valueOf(portText.getText())), 10, sendingBytes);
+                                        managerClass.firing = true;
                                     } catch (UnknownHostException e) {
-                                        e.printStackTrace();
-                                    } catch (SocketException e) {
                                         e.printStackTrace();
                                     } catch (IOException e) {
                                         e.printStackTrace();
@@ -121,31 +144,31 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
                                 }
                             }
                         }
-                        runOnce = true;
+                        Runnable r = new Runnable() {
+                            @Override
+                            public void run() {
+                                while (managerClass.firing) {
+                                    MainActivity.this.runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            numberOfPacketSentText.setText(String.valueOf(UDPpacket.count));
+                                        }
+                                    });
+                                }
+                            }
+                        };
+                        new Thread(r).start();
                         break;
                     case 2:
                         tempCount = 0;
-                        isFiring = false;
+                        services.stop();
                         fireButton.setText("Start");
                         break;
                 }
+                */
             }
         });
-        Runnable r = new Runnable() {
-            @Override
-            public void run() {
-                while(isFiring){
-                    MainActivity.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            numberOfPacketSentText.setText(String.valueOf(numberOfPacketsSent));
-                        }
-                    });
-                }
-            }
-        };
 
-        new Thread(r).start();
     }
 
     public void initialize() throws MalformedURLException, UnknownHostException {

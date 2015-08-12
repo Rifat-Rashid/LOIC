@@ -19,7 +19,7 @@ public class managerClass {
             UDPpacket[] udPpacketsThread = new UDPpacket[threads];
             for(int i = 0; i < threads; i++){
                 udPpacketsThread[i] = new UDPpacket(ip,data, port);
-                new Thread(udPpacketsThread[i]);
+                new Thread(udPpacketsThread[i]).start();
             }
         }catch (Exception io){
             io.printStackTrace();

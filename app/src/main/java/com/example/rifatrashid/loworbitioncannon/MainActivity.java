@@ -114,6 +114,11 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
                                                 case 3:
                                                     break;
                                             }
+                                            try{
+                                                Thread.sleep(50);
+                                            }catch (Exception io){
+                                                io.printStackTrace();
+                                            }
                                         }
                                     }
                                 };

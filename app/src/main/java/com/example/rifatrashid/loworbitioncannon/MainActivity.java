@@ -28,19 +28,15 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
     private TextView urlTextView;
     private EditText ipTextBox;
     private boolean usingURL = false;
-    private String IPADDRESS = null;
     private Integer PORT = null;
     private InetAddress address = null;
-    private RadioButton UDPOption, TCPOption;
+    private RadioButton UDPOption, TCPOption, HTTPOption;
     public static TextView numberOfPacketSentText;
     private TextView packetsPerSecondText;
     private Button fireButton;
-    private InetAddress trueAddress;
-    public static boolean isFiring = false;
-    private Integer tempCount = 0;
     private byte[] sendingBytes = new byte[65100];
-    private boolean runOnce = false;
     private managerClass services;
+    private int methodType = 1;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +51,9 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
         urlTextView = (TextView) findViewById(R.id.ip_text);
         ipTextBox = (EditText) findViewById(R.id.ip_textbox);
         UDPOption = (RadioButton) findViewById(R.id.udp_radio);
+        HTTPOption = (RadioButton) findViewById(R.id.httpButton);
         TCPOption = (RadioButton) findViewById(R.id.tcp_radio);
+        HTTPOption.setOnCheckedChangeListener(this);
         UDPOption.setOnCheckedChangeListener(this);
         TCPOption.setOnCheckedChangeListener(this);
         services = new managerClass();
@@ -89,29 +87,35 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
             @Override
             public void onClick(View v) {
                 if (!managerClass.firing) {
-                    if (UDPOption.isChecked() == true) {
-                        if (portText.getText() != null) {
-                            if (Pattern.matches("[a-zA-Z]+", portText.getText()) == false) {
-                                PORT = Integer.parseInt(String.valueOf(portText.getText()));
-                                try {
-                                    InetAddress realAddress = InetAddress.getByName(address.getHostAddress());
-                                    services.start(realAddress, PORT, 35, sendingBytes);
-                                    fireButton.setText("Stop");
-                                    Runnable r = new Runnable() {
-                                        public void run() {
-                                            while (managerClass.firing) {
-                                                MainActivity.this.runOnUiThread(new Runnable() {
-                                                    public void run() {
-                                                        numberOfPacketSentText.setText(String.valueOf(UDPpacket.count));
-                                                    }
-                                                });
+                    if (portText.getText() != null) {
+                        if (Pattern.matches("[a-zA-Z]+", portText.getText()) == false) {
+                            PORT = Integer.parseInt(String.valueOf(portText.getText()));
+                            try {
+                                InetAddress realAddress = InetAddress.getByName(address.getHostAddress());
+                                services.start(realAddress, PORT, 35, sendingBytes, methodType);
+                                fireButton.setText("Stop");
+                                Runnable r = new Runnable() {
+                                    public void run() {
+                                        while (managerClass.firing) {
+                                            switch (methodType){
+                                                case 1:
+                                                    MainActivity.this.runOnUiThread(new Runnable() {
+                                                        public void run() {
+                                                            numberOfPacketSentText.setText(String.valueOf(UDPpacket.count));
+                                                        }
+                                                    });
+                                                    break;
+                                                case 2:
+                                                    break;
+                                                case 3:
+                                                    break;
                                             }
                                         }
-                                    };
-                                    new Thread(r).start();
-                                } catch (Exception io) {
+                                    }
+                                };
+                                new Thread(r).start();
+                            } catch (Exception io) {
 
-                                }
                             }
                         }
                     }
@@ -119,53 +123,6 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
                     services.stop();
                     fireButton.setText("Start");
                 }
-                /*
-                tempCount++;
-                switch (tempCount) {
-                    case 0:
-                        fireButton.setText("Start");
-                        break;
-                    case 1:
-                        isFiring = true;
-                        fireButton.setText("Stop");
-                        if (UDPOption.isChecked() == true) {
-                            if (portText.getText() != null) {
-                                if (Pattern.matches("[a-zA-Z]+", portText.getText()) == false) {
-                                    PORT = Integer.parseInt(String.valueOf(portText.getText()));
-                                    try {
-                                        InetAddress realAddress = InetAddress.getByName(address.getHostAddress());
-                                        services.start(realAddress, Integer.parseInt(String.valueOf(portText.getText())), 10, sendingBytes);
-                                        managerClass.firing = true;
-                                    } catch (UnknownHostException e) {
-                                        e.printStackTrace();
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            }
-                        }
-                        Runnable r = new Runnable() {
-                            @Override
-                            public void run() {
-                                while (managerClass.firing) {
-                                    MainActivity.this.runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            numberOfPacketSentText.setText(String.valueOf(UDPpacket.count));
-                                        }
-                                    });
-                                }
-                            }
-                        };
-                        new Thread(r).start();
-                        break;
-                    case 2:
-                        tempCount = 0;
-                        services.stop();
-                        fireButton.setText("Start");
-                        break;
-                }
-                */
             }
         });
 
@@ -177,14 +134,25 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        //MethodType keeps track of which attack option the user has selected
         if (isChecked) {
             if (buttonView.getId() == R.id.tcp_radio) {
                 TCPOption.setChecked(true);
                 UDPOption.setChecked(false);
+                HTTPOption.setChecked(false);
+                methodType = 3;
             }
             if (buttonView.getId() == R.id.udp_radio) {
                 TCPOption.setChecked(false);
                 UDPOption.setChecked(true);
+                HTTPOption.setChecked(false);
+                methodType = 1;
+            }
+            if (buttonView.getId() == R.id.httpButton) {
+                TCPOption.setChecked(false);
+                HTTPOption.setChecked(true);
+                UDPOption.setChecked(false);
+                methodType = 2;
             }
         }
     }

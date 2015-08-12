@@ -251,4 +251,14 @@
         android:layout_alignStart="@+id/port_textbox"
         android:layout_alignBottom="@+id/ip_textbox" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Ellapsed Time: "
+        android:id="@+id/ellapsedTimeText"
+        android:textColor="#2a2a2a"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

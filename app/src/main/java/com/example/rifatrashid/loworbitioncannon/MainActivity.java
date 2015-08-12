@@ -37,6 +37,7 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
     private byte[] sendingBytes = new byte[65100];
     private managerClass services;
     private int methodType = 1;
+    private TextView ellapsedTimeText;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +62,7 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
         numberOfPacketSentText.setText(String.valueOf(numberOfPacketsSent));
         packetsPerSecondText = (TextView) findViewById(R.id.packetsPerSecondText);
         packetsPerSecondText.setText("0");
+        ellapsedTimeText = (TextView) findViewById(R.id.ellapsedTimeText);
         fireButton = (Button) findViewById(R.id.fireButton);
         getIPButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +104,8 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
                                                     MainActivity.this.runOnUiThread(new Runnable() {
                                                         public void run() {
                                                             numberOfPacketSentText.setText(String.valueOf(UDPpacket.count));
+                                                            packetsPerSecondText.setText(String.valueOf(Math.round(UDPpacket.count / ((System.currentTimeMillis() - UDPpacket.sTime) / 1000.0))));
+                                                            ellapsedTimeText.setText("Elapsed Time: " + (System.currentTimeMillis() - UDPpacket.sTime) / 1000.0 + "s");
                                                         }
                                                     });
                                                     break;

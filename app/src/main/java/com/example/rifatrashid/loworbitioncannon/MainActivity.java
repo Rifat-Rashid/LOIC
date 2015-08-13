@@ -1,10 +1,15 @@
 package com.example.rifatrashid.loworbitioncannon;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
@@ -15,7 +20,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.net.InetAddress;
-import java.net.URL;
 import java.util.regex.Pattern;
 
 public class MainActivity extends ActionBarActivity implements CompoundButton.OnCheckedChangeListener {
@@ -41,6 +45,8 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
     private TextView elapsedTimeText;
     private EditText numberOfThreadsText;
     private boolean gotIP = false;
+    protected PowerManager.WakeLock wakeLock;
+    private String attackIP;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +55,24 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#2a2a2a")));
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+        //User Agreement
+
+        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        if (preferences.getBoolean("startMessage", true)) {
+            new AlertDialog.Builder(this).setTitle("Terms of Use").setMessage("Low Orbit Ion Cannon (LOIC) is a tool that was designed purley for stress testing networks. The developer assumes no responsibility for any illegal or unintended use of this tool. Enjoy :)").setPositiveButton("Accept", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    preferences.edit().putBoolean("startMessage", false).commit();
+                }
+            }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    preferences.edit().putBoolean("startMessage", true).commit();
+                }
+            }).show();
+
+        }
+        //
         urlText = (EditText) findViewById(R.id.url_textbox);
         portText = (EditText) findViewById(R.id.port_textbox);
         getIPButton = (Button) findViewById(R.id.getIp);
@@ -68,7 +92,9 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
         elapsedTimeText = (TextView) findViewById(R.id.elapsedTimeText);
         fireButton = (Button) findViewById(R.id.fireButton);
         numberOfThreadsText = (EditText) findViewById(R.id.threadText);
-
+        final PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        this.wakeLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "Lock");
+        this.wakeLock.acquire();
         getIPButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,9 +106,12 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
                     gotIP = true;
                 } else {
                     try {
+                        /*
                         address = InetAddress.getByName(new URL(tempURL).getHost());
                         urlTextView.setText(address.getHostAddress().toString());
                         gotIP = true;
+                        */
+                        getWebIP(tempURL);
                     } catch (Exception e) {
                         //Error
                         e.printStackTrace();
@@ -96,19 +125,19 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
             @Override
             public void onClick(View v) {
                 if (!managerClass.firing) {
-                    if(gotIP) {
+                    if (gotIP) {
                         if (portText.getText() != null) {
                             if (Pattern.matches("[a-zA-Z]+", portText.getText()) == false) {
                                 try {
                                     PORT = Integer.parseInt(String.valueOf(portText.getText()));
-                                }catch (Exception e){
+                                } catch (Exception e) {
                                     e.printStackTrace();
                                 }
                                 if (numberOfThreadsText.getText() != null) {
                                     if (Pattern.matches("[a-zA-Z]+", numberOfThreadsText.getText()) == false) {
                                         try {
                                             THREADS = Integer.parseInt(String.valueOf(numberOfThreadsText.getText()));
-                                        }catch (Exception e){
+                                        } catch (Exception e) {
                                             e.printStackTrace();
                                         }
                                     } else {
@@ -186,14 +215,14 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
 
                             }
                         }
-                    }else{
+                    } else {
                         try {
                             Context context = getApplicationContext();
                             CharSequence errorMessage = "IP Not Selected";
                             int duration = Toast.LENGTH_LONG;
                             Toast toast = Toast.makeText(context, errorMessage, duration);
                             toast.show();
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             //Something happened here!
                             e.printStackTrace();
                         }
@@ -204,7 +233,51 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
                 }
             }
         });
+    }
 
+    public void getWebIP(final String address) {
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    String webAddress = address.replace("http://", "").replace("www.", "");
+                    if (webAddress.length() > 0) {
+                        attackIP = InetAddress.getByName(webAddress).getHostAddress();
+                        Runnable r = new Runnable() {
+                            @Override
+                            public void run() {
+                                urlTextView.setText(attackIP);
+                            }
+                        };
+                        MainActivity.this.runOnUiThread(r);
+                    }
+                } catch (Exception e) {
+                    Context context = getApplicationContext();
+                    CharSequence errorMessage = "Unable to get IP, try adding www. to the web address";
+                    int duration = Toast.LENGTH_LONG;
+                    Toast toast = Toast.makeText(context, errorMessage, duration);
+                    toast.show();
+                    e.printStackTrace();
+                }
+            }
+        };
+        new Thread(r).start();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (managerClass.firing) {
+            services.stop();
+            fireButton.setText("Fire");
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        services.stop();
     }
 
     @Override
@@ -231,7 +304,6 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
             }
         }
     }
-
 }
 
 

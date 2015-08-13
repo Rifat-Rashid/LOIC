@@ -25,7 +25,6 @@ import java.util.regex.Pattern;
 
 public class MainActivity extends ActionBarActivity implements CompoundButton.OnCheckedChangeListener {
 
-    public static UDPpacket udpPacket;
     public static long numberOfPacketsSent = 0;
     private Button getIPButton;
     private EditText portText;

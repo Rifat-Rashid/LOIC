@@ -21,7 +21,7 @@ public class HTTPpacket implements Runnable {
     public static int count = 0;
     public static long sTime = 0;
 
-    public HTTPpacket(InetAddress IPAddress, byte[] sendData, int port)throws IOException{
+    public HTTPpacket(InetAddress IPAddress, byte[] sendData, int port, int pause)throws IOException{
         this.IPAddress = IPAddress;
         this.sendData = sendData;
         this.port = port;

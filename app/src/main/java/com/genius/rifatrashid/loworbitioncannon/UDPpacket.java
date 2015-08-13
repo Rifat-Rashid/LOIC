@@ -20,7 +20,7 @@ public class UDPpacket implements Runnable {
     public static long sTime = 0;
 
 
-    public UDPpacket(InetAddress IPAddress, byte[] sendData, int port) throws SocketException {
+    public UDPpacket(InetAddress IPAddress, byte[] sendData, int port, int pause) throws SocketException {
         this.IPAddress = IPAddress;
         this.sendData = sendData;
         this.port = port;

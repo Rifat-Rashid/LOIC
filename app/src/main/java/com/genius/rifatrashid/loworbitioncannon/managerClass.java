@@ -13,7 +13,7 @@ public class managerClass {
 
     }
 
-    public void start(InetAddress ip, int port, int threads, byte[] data, int methodType) {
+    public void start(InetAddress ip, int port, int threads, byte[] data, int methodType, int pause) {
         firing = true;
         switch (methodType) {
             //UDP
@@ -21,7 +21,7 @@ public class managerClass {
                 try {
                     UDPpacket[] udPpacketsThread = new UDPpacket[threads];
                     for (int i = 0; i < threads; i++) {
-                        udPpacketsThread[i] = new UDPpacket(ip, data, port);
+                        udPpacketsThread[i] = new UDPpacket(ip, data, port, pause);
                         new Thread(udPpacketsThread[i]).start();
                     }
                 } catch (Exception io) {
@@ -33,7 +33,7 @@ public class managerClass {
                 try {
                     TCPpacket[] tcpPacketsThread = new TCPpacket[threads];
                     for (int i = 0; i < threads; i++) {
-                        tcpPacketsThread[i] = new TCPpacket(ip, data, port);
+                        tcpPacketsThread[i] = new TCPpacket(ip, data, port, pause);
                         new Thread(tcpPacketsThread[i]).start();
                     }
                 } catch (Exception io) {
@@ -45,7 +45,7 @@ public class managerClass {
                 try {
                     HTTPpacket[] httpPacketsThread = new HTTPpacket[threads];
                     for (int i = 0; i < threads; i++) {
-                        httpPacketsThread[i] = new HTTPpacket(ip, data, port);
+                        httpPacketsThread[i] = new HTTPpacket(ip, data, port, pause);
                         new Thread(httpPacketsThread[i]).start();
                     }
                 } catch (Exception io) {

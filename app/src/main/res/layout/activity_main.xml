@@ -54,9 +54,8 @@
         android:layout_height="1dp"
         android:background="#2a2a2a"
         android:id="@+id/view"
-        android:layout_above="@+id/ip_text"
-        android:layout_alignStart="@+id/ip_textbox"
-        android:layout_marginBottom="31dp" />
+        android:layout_above="@+id/suubText1"
+        android:layout_alignParentStart="true" />
 
     <RadioButton
         android:layout_width="wrap_content"
@@ -130,15 +129,15 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="2. Targeted IP"
         android:id="@+id/suubText1"
-        android:layout_alignTop="@+id/view"
-        android:layout_alignStart="@+id/view"
-        android:textColor="#2a2a2a" />
+        android:textColor="#2a2a2a"
+        android:layout_above="@+id/ip_text"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="3. Fire Method"
+        android:text="3. Send Method"
         android:id="@+id/textView3"
         android:layout_below="@+id/ip_text"
         android:layout_alignStart="@+id/view1"
@@ -219,7 +218,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="4. Fire"
+        android:text="4. Send"
         android:id="@+id/textView6"
         android:layout_below="@+id/packetsPerSecondText"
         android:layout_alignParentStart="true"

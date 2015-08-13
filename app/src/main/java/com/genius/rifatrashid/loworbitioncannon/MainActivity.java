@@ -48,6 +48,7 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
     private boolean gotIP = false;
     protected PowerManager.WakeLock wakeLock;
     private String attackIP;
+    private static final int PAUSE_TIME = 50;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,7 +58,6 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         //User Agreement
-
         final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         if (preferences.getBoolean("startMessage", true)) {
             new AlertDialog.Builder(this).setTitle("Terms of Use").setMessage("Low Orbit Ion Cannon (LOIC) is a tool that was designed purley for stress testing networks. The developer assumes no responsibility for any illegal or unintended use of this tool. Enjoy :)").setPositiveButton("Accept", new DialogInterface.OnClickListener() {
@@ -144,7 +144,7 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
                                     //Insert code block here !
                                     try {
                                         InetAddress realAddress = InetAddress.getByName(address.getHostAddress());
-                                        services.start(realAddress, PORT, THREADS, sendingBytes, methodType);
+                                        services.start(realAddress, PORT, THREADS, sendingBytes, methodType, PAUSE_TIME);
                                         fireButton.setText("Stop");
                                         Runnable r = new Runnable() {
                                             public void run() {
@@ -226,7 +226,7 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
                     }
                 } else {
                     services.stop();
-                    fireButton.setText("Fire");
+                    fireButton.setText("Start");
                 }
             }
         });

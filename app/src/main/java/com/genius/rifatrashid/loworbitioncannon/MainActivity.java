@@ -1,4 +1,4 @@
-package com.example.rifatrashid.loworbitioncannon;
+package com.genius.rifatrashid.loworbitioncannon;
 
 import android.app.AlertDialog;
 import android.content.Context;

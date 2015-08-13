@@ -1,4 +1,4 @@
-package com.example.rifatrashid.loworbitioncannon;
+package com.genius.rifatrashid.loworbitioncannon;
 
 import java.net.InetAddress;
 

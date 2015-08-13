@@ -209,7 +209,7 @@
     <Button
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:text="Start"
+        android:text="Fire"
         android:id="@+id/fireButton"
         android:layout_below="@+id/packetsPerSecondText"
         android:layout_centerHorizontal="true"

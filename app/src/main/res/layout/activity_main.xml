@@ -255,8 +255,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Ellapsed Time: "
-        android:id="@+id/ellapsedTimeText"
+        android:text="Elapsed Time: "
+        android:id="@+id/elapsedTimeText"
         android:textColor="#2a2a2a"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />

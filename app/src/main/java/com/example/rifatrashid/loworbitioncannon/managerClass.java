@@ -30,18 +30,27 @@ public class managerClass {
                 break;
             //HTTP
             case 2:
-                try{
+                try {
                     TCPpacket[] tcpPacketsThread = new TCPpacket[threads];
-                    for(int i = 0; i < threads; i++){
+                    for (int i = 0; i < threads; i++) {
                         tcpPacketsThread[i] = new TCPpacket(ip, data, port);
                         new Thread(tcpPacketsThread[i]).start();
                     }
-                }catch (Exception io){
+                } catch (Exception io) {
                     io.printStackTrace();
                 }
                 break;
             //TCP
             case 3:
+                try {
+                    HTTPpacket[] httpPacketsThread = new HTTPpacket[threads];
+                    for (int i = 0; i < threads; i++) {
+                        httpPacketsThread[i] = new HTTPpacket(ip, data, port);
+                        new Thread(httpPacketsThread[i]).start();
+                    }
+                } catch (Exception io) {
+                    io.printStackTrace();
+                }
                 break;
         }
     }

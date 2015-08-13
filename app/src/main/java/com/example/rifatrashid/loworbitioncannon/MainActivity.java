@@ -20,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.net.InetAddress;
+import java.net.URL;
 import java.util.regex.Pattern;
 
 public class MainActivity extends ActionBarActivity implements CompoundButton.OnCheckedChangeListener {
@@ -106,12 +107,8 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
                     gotIP = true;
                 } else {
                     try {
-                        /*
-                        address = InetAddress.getByName(new URL(tempURL).getHost());
-                        urlTextView.setText(address.getHostAddress().toString());
-                        gotIP = true;
-                        */
                         getWebIP(tempURL);
+                        address = InetAddress.getByName(new URL(tempURL).getHost());
                     } catch (Exception e) {
                         //Error
                         e.printStackTrace();
@@ -235,18 +232,19 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
         });
     }
 
-    public void getWebIP(final String address) {
+    public void getWebIP(final String address1) {
         Runnable r = new Runnable() {
             @Override
             public void run() {
                 try {
-                    String webAddress = address.replace("http://", "").replace("www.", "");
+                    String webAddress = address1.replace("http://", "").replace("www.", "");
                     if (webAddress.length() > 0) {
                         attackIP = InetAddress.getByName(webAddress).getHostAddress();
                         Runnable r = new Runnable() {
                             @Override
                             public void run() {
                                 urlTextView.setText(attackIP);
+                                gotIP = true;
                             }
                         };
                         MainActivity.this.runOnUiThread(r);

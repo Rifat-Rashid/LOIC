@@ -28,8 +28,8 @@ public class managerClass {
                     io.printStackTrace();
                 }
                 break;
-            //HTTP
-            case 2:
+            //TCP
+            case 3:
                 try {
                     TCPpacket[] tcpPacketsThread = new TCPpacket[threads];
                     for (int i = 0; i < threads; i++) {
@@ -40,8 +40,8 @@ public class managerClass {
                     io.printStackTrace();
                 }
                 break;
-            //TCP
-            case 3:
+            //HTTP
+            case 2:
                 try {
                     HTTPpacket[] httpPacketsThread = new HTTPpacket[threads];
                     for (int i = 0; i < threads; i++) {

@@ -1,16 +1,14 @@
 package com.genius.rifatrashid.loworbitioncannon;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
-import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -19,11 +17,14 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import java.net.InetAddress;
 import java.net.URL;
 import java.util.regex.Pattern;
 
-public class MainActivity extends ActionBarActivity implements CompoundButton.OnCheckedChangeListener {
+public class MainActivity extends Activity implements CompoundButton.OnCheckedChangeListener {
 
     public static long numberOfPacketsSent = 0;
     private Button getIPButton;
@@ -49,11 +50,10 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
     private String attackIP;
     private static final int PAUSE_TIME = 50;
 
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().setElevation(0);
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#2a2a2a")));
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         //User Agreement
@@ -72,6 +72,12 @@ public class MainActivity extends ActionBarActivity implements CompoundButton.On
             }).show();
 
         }
+        //
+
+        //Ads (:
+        AdView mAdView = (AdView) findViewById(R.id.adView1);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
         //
         urlText = (EditText) findViewById(R.id.url_textbox);
         portText = (EditText) findViewById(R.id.port_textbox);

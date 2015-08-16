@@ -3,6 +3,7 @@
     android:layout_height="match_parent" android:paddingLeft="0dp"
     android:paddingRight="0dp"
     android:paddingTop="0dp"
+    xmlns:ads="http://schemas.android.com/apk/res-auto"
     android:paddingBottom="0dp" tools:context=".MainActivity"
     android:background="#191819"
     android:id="@+id/aka">
@@ -35,7 +36,6 @@
         android:layout_height="33dp"
         android:text="Get IP"
         android:id="@+id/getIp"
-        android:layout_above="@+id/view"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/ip_textbox" />
 
@@ -54,7 +54,7 @@
         android:layout_height="1dp"
         android:background="#2a2a2a"
         android:id="@+id/view"
-        android:layout_above="@+id/suubText1"
+        android:layout_below="@+id/getIp"
         android:layout_alignParentStart="true" />
 
     <RadioButton
@@ -65,8 +65,9 @@
         android:textColor="#d3d3d3"
         android:enabled="true"
         android:checked="true"
-        android:layout_centerVertical="true"
-        android:layout_toStartOf="@+id/fireButton" />
+        android:layout_below="@+id/view1"
+        android:layout_toStartOf="@+id/fireButton"
+        android:layout_marginTop="22dp" />
 
     <RadioButton
         android:layout_width="wrap_content"
@@ -82,9 +83,8 @@
         android:layout_height="1dp"
         android:background="#2a2a2a"
         android:id="@+id/view1"
-        android:layout_marginBottom="23dp"
-        android:layout_above="@+id/udp_radio"
-        android:layout_alignStart="@+id/view" />
+        android:layout_below="@+id/textView3"
+        android:layout_alignEnd="@+id/threadText" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -92,10 +92,9 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="IP Unselected"
         android:id="@+id/ip_text"
-        android:layout_above="@+id/view1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="22dp"
-        android:textColor="#d3d3d3" />
+        android:textColor="#d3d3d3"
+        android:layout_below="@+id/suubText1"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="76dp"
@@ -130,7 +129,7 @@
         android:text="2. Targeted IP"
         android:id="@+id/suubText1"
         android:textColor="#2a2a2a"
-        android:layout_above="@+id/ip_text"
+        android:layout_below="@+id/view"
         android:layout_alignParentStart="true" />
 
     <TextView
@@ -158,9 +157,8 @@
         android:layout_height="1dp"
         android:background="#2a2a2a"
         android:id="@+id/view5"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/view2"
-        android:layout_marginBottom="101dp" />
+        android:layout_below="@+id/textView5"
+        android:layout_alignEnd="@+id/threadText" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -170,9 +168,9 @@
         android:id="@+id/textView4"
         android:textColor="#2a2a2a"
         android:textSize="27dp"
-        android:layout_above="@+id/view5"
-        android:layout_alignEnd="@+id/textView"
-        android:layout_marginBottom="48dp" />
+        android:layout_below="@+id/view2"
+        android:layout_alignEnd="@+id/textView5"
+        android:layout_marginTop="41dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -192,8 +190,9 @@
         android:text="Packets/sec:"
         android:id="@+id/textView5"
         android:textColor="#2a2a2a"
-        android:layout_above="@+id/view5"
-        android:layout_toStartOf="@+id/packetSentText" />
+        android:layout_below="@+id/textView4"
+        android:layout_toStartOf="@+id/packetSentText"
+        android:layout_marginTop="26dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -201,9 +200,9 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="0"
         android:id="@+id/packetsPerSecondText"
+        android:textColor="#d3d3d3"
         android:layout_alignBottom="@+id/view5"
-        android:layout_toEndOf="@+id/textView5"
-        android:textColor="#d3d3d3" />
+        android:layout_alignStart="@+id/packetSentText" />
 
     <Button
         android:layout_width="150dp"
@@ -257,7 +256,17 @@
         android:text="Elapsed Time: "
         android:id="@+id/elapsedTimeText"
         android:textColor="#2a2a2a"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/fireButton"
         android:layout_centerHorizontal="true" />
+
+    <com.google.android.gms.ads.AdView
+        android:id="@+id/adView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:adSize="BANNER"
+        ads:adUnitId="@string/banner_ad_unit_id">
+    </com.google.android.gms.ads.AdView>
 
 </RelativeLayout>

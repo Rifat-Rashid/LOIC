@@ -75,7 +75,7 @@ public class MainActivity extends Activity implements CompoundButton.OnCheckedCh
         //
 
         //Ads (:
-        AdView mAdView = (AdView) findViewById(R.id.adView1);
+        AdView mAdView = (AdView) findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
         //

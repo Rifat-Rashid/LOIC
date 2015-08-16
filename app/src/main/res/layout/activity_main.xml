@@ -33,11 +33,11 @@
 
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="33dp"
+        android:layout_height="43dp"
         android:text="Get IP"
         android:id="@+id/getIp"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/ip_textbox" />
+        android:layout_below="@+id/ip_textbox"
+        android:layout_alignStart="@+id/httpButton" />
 
     <EditText
         android:layout_width="280dp"
@@ -83,7 +83,7 @@
         android:layout_height="1dp"
         android:background="#2a2a2a"
         android:id="@+id/view1"
-        android:layout_below="@+id/textView3"
+        android:layout_below="@+id/ip_text"
         android:layout_alignEnd="@+id/threadText" />
 
     <TextView
@@ -258,9 +258,8 @@
         android:textColor="#2a2a2a"
         android:layout_below="@+id/fireButton"
         android:layout_centerHorizontal="true" />
-
     <com.google.android.gms.ads.AdView
-        android:id="@+id/adView1"
+        android:id="@+id/adView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"

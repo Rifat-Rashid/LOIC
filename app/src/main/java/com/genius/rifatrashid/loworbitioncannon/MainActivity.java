@@ -49,6 +49,7 @@ public class MainActivity extends Activity implements CompoundButton.OnCheckedCh
     protected PowerManager.WakeLock wakeLock;
     private String attackIP;
     private static final int PAUSE_TIME = 50;
+    private AdView mAdView;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,10 +75,20 @@ public class MainActivity extends Activity implements CompoundButton.OnCheckedCh
         }
         //
 
-        //Ads (:
-        AdView mAdView = (AdView) findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mAdView = (AdView) findViewById(R.id.adView);
+                        AdRequest adRequest = new AdRequest.Builder().build();
+                        mAdView.loadAd(adRequest);
+                    }
+                });
+            }
+        };
+         new Thread(r).start();
         //
         urlText = (EditText) findViewById(R.id.url_textbox);
         portText = (EditText) findViewById(R.id.port_textbox);
@@ -279,8 +290,27 @@ public class MainActivity extends Activity implements CompoundButton.OnCheckedCh
 
     @Override
     public void onDestroy() {
+        if(mAdView != null){
+            mAdView.destroy();
+        }
         super.onDestroy();
         services.stop();
+    }
+
+    @Override
+    public void onPause(){
+        if(mAdView != null){
+            mAdView.pause();
+        }
+        super.onPause();
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        if(mAdView != null){
+            mAdView.resume();
+        }
     }
 
     @Override

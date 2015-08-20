@@ -37,7 +37,7 @@
         android:text="Get IP"
         android:id="@+id/getIp"
         android:layout_below="@+id/ip_textbox"
-        android:layout_alignStart="@+id/httpButton" />
+        android:layout_toEndOf="@+id/ip_textbox" />
 
     <EditText
         android:layout_width="280dp"
@@ -267,5 +267,24 @@
         ads:adSize="BANNER"
         ads:adUnitId="@string/banner_ad_unit_id">
     </com.google.android.gms.ads.AdView>
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="URL"
+        android:id="@+id/httpRadio"
+        android:layout_alignBottom="@+id/getIp"
+        android:layout_alignParentStart="true"
+        android:textColor="#d2d2d2"
+        android:checked="true" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Manual IP"
+        android:id="@+id/ipRadio"
+        android:layout_alignTop="@+id/httpRadio"
+        android:layout_alignEnd="@+id/textView"
+        android:textColor="#d2d2d2" />
 
 </RelativeLayout>

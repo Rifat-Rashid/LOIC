@@ -36,7 +36,7 @@ public class MainActivity extends Activity implements CompoundButton.OnCheckedCh
     private Integer PORT = null;
     private Integer THREADS = null;
     private InetAddress address = null;
-    private RadioButton UDPOption, TCPOption, HTTPOption;
+    private RadioButton UDPOption, TCPOption, HTTPOption, manualIP, httpIP;
     public static TextView numberOfPacketSentText;
     private TextView packetsPerSecondText;
     private Button fireButton;
@@ -88,7 +88,7 @@ public class MainActivity extends Activity implements CompoundButton.OnCheckedCh
                 });
             }
         };
-         new Thread(r).start();
+        new Thread(r).start();
         //
         urlText = (EditText) findViewById(R.id.url_textbox);
         portText = (EditText) findViewById(R.id.port_textbox);
@@ -108,6 +108,10 @@ public class MainActivity extends Activity implements CompoundButton.OnCheckedCh
         packetsPerSecondText.setText("0");
         elapsedTimeText = (TextView) findViewById(R.id.elapsedTimeText);
         fireButton = (Button) findViewById(R.id.fireButton);
+        manualIP = (RadioButton) findViewById(R.id.ipRadio);
+        manualIP.setOnCheckedChangeListener(this);
+        httpIP = (RadioButton) findViewById(R.id.httpRadio);
+        httpIP.setOnCheckedChangeListener(this);
         numberOfThreadsText = (EditText) findViewById(R.id.threadText);
         final PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         this.wakeLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "Lock");
@@ -290,7 +294,7 @@ public class MainActivity extends Activity implements CompoundButton.OnCheckedCh
 
     @Override
     public void onDestroy() {
-        if(mAdView != null){
+        if (mAdView != null) {
             mAdView.destroy();
         }
         super.onDestroy();
@@ -298,17 +302,17 @@ public class MainActivity extends Activity implements CompoundButton.OnCheckedCh
     }
 
     @Override
-    public void onPause(){
-        if(mAdView != null){
+    public void onPause() {
+        if (mAdView != null) {
             mAdView.pause();
         }
         super.onPause();
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
-        if(mAdView != null){
+        if (mAdView != null) {
             mAdView.resume();
         }
     }
@@ -334,6 +338,14 @@ public class MainActivity extends Activity implements CompoundButton.OnCheckedCh
                 HTTPOption.setChecked(true);
                 UDPOption.setChecked(false);
                 methodType = 2;
+            }
+            if(buttonView.getId() == R.id.httpRadio){
+                httpIP.setChecked(true);
+                manualIP.setChecked(false);
+            }
+            if(buttonView.getId() == R.id.ipRadio){
+                httpIP.setChecked(false);
+                manualIP.setChecked(true);
             }
         }
     }

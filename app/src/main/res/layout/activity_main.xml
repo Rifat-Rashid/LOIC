@@ -258,6 +258,15 @@
         android:textColor="#2a2a2a"
         android:layout_below="@+id/fireButton"
         android:layout_centerHorizontal="true" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#2a2a2a"
+        android:id="@+id/view8"
+        android:layout_below="@+id/elapsedTimeText"
+        android:layout_alignEnd="@+id/threadText" />
+
     <com.google.android.gms.ads.AdView
         android:id="@+id/adView"
         android:layout_width="wrap_content"

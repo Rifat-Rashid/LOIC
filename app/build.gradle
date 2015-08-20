@@ -8,8 +8,8 @@ android {
         applicationId "com.genius.rifatrashid.loworbitioncannon"
         minSdkVersion 19
         targetSdkVersion 22
-        versionCode 8
-        versionName "2.4"
+        versionCode 9
+        versionName "2.5"
     }
     buildTypes {
         release {

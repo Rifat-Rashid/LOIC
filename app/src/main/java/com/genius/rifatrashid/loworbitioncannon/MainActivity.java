@@ -40,7 +40,7 @@ public class MainActivity extends Activity implements CompoundButton.OnCheckedCh
     public static TextView numberOfPacketSentText;
     private TextView packetsPerSecondText;
     private Button fireButton;
-    private byte[] sendingBytes = new byte[65100];
+    private byte[] sendingBytes = new byte[1024];
     private managerClass services;
     private int methodType = 1;
     private TextView elapsedTimeText;

@@ -120,21 +120,36 @@ public class MainActivity extends Activity implements CompoundButton.OnCheckedCh
             @Override
             public void onClick(View v) {
                 String tempURL = urlText.getText().toString();
-                usingURL = (tempURL.contains("www") || tempURL.contains("WWW")) ? true : false;
-                if (!usingURL) {
-                    tempURL = ipTextBox.getText().toString();
-                    urlTextView.setText(tempURL);
-                    gotIP = true;
+                if (manualIP.isChecked()) {
+                    //Manualy typed ip\
+                    try {
+                        tempURL = ipTextBox.getText().toString();
+                        urlTextView.setText(tempURL);
+                        gotIP = true;
+                    }catch (Exception e){
+                        e.printStackTrace();
+                        Context context = getApplicationContext();
+                        CharSequence errorMessage = "Error with manually typed IP";
+                        int duration = Toast.LENGTH_LONG;
+                        Toast toast = Toast.makeText(context, errorMessage, duration);
+                        toast.show();
+                    }
                 } else {
+                    //used http url
                     try {
                         getWebIP(tempURL);
                         address = InetAddress.getByName(new URL(tempURL).getHost());
                     } catch (Exception e) {
                         //Error
                         e.printStackTrace();
+                        Context context = getApplicationContext();
+                        CharSequence errorMessage = "Error getting IP from URL";
+                        int duration = Toast.LENGTH_LONG;
+                        Toast toast = Toast.makeText(context, errorMessage, duration);
+                        toast.show();
                     }
                 }
-
+                //usingURL = (tempURL.contains("www") || tempURL.contains("WWW")) ? true : false;
             }
         });
 
@@ -339,11 +354,11 @@ public class MainActivity extends Activity implements CompoundButton.OnCheckedCh
                 UDPOption.setChecked(false);
                 methodType = 2;
             }
-            if(buttonView.getId() == R.id.httpRadio){
+            if (buttonView.getId() == R.id.httpRadio) {
                 httpIP.setChecked(true);
                 manualIP.setChecked(false);
             }
-            if(buttonView.getId() == R.id.ipRadio){
+            if (buttonView.getId() == R.id.ipRadio) {
                 httpIP.setChecked(false);
                 manualIP.setChecked(true);
             }

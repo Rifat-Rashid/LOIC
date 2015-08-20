@@ -20,10 +20,11 @@ public class HTTPpacket implements Runnable {
     private boolean isReachable = true;
     public static int count = 0;
     public static long sTime = 0;
+    private byte[] otherTypeOfSend = new byte[500];
 
     public HTTPpacket(InetAddress IPAddress, byte[] sendData, int port, int pause)throws IOException{
         this.IPAddress = IPAddress;
-        this.sendData = sendData;
+        this.sendData = otherTypeOfSend;
         this.port = port;
     }
     @Override

@@ -42,6 +42,11 @@ public class TCPpacket implements Runnable {
                 sock.close();
                 count++;
                 Thread.sleep(10);
+                if(MainActivity.isICMP){
+
+                }else {
+                    break;
+                }
             }catch (Exception io){
                 io.printStackTrace();
             }

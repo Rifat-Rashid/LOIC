@@ -19,13 +19,13 @@ public class UDPpacket implements Runnable {
     public static int count = 0;
     public static long sTime = 0;
 
-
     public UDPpacket(InetAddress IPAddress, byte[] sendData, int port, int pause) throws SocketException {
         this.IPAddress = IPAddress;
         this.sendData = sendData;
         this.port = port;
         clientSocket = new DatagramSocket();
         sendPacket = new DatagramPacket(sendData, sendData.length, IPAddress, port);
+
     }
 
     public void setStringIP(String ip) {
@@ -45,6 +45,11 @@ public class UDPpacket implements Runnable {
                 clientSocket.send(sendPacket);
                 count++;
                 Thread.sleep(10);
+                if(MainActivity.isICMP){
+
+                }else {
+                    break;
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }

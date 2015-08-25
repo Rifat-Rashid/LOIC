@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,7 +51,8 @@ public class MainActivity extends Activity implements CompoundButton.OnCheckedCh
     private String attackIP;
     private static final int PAUSE_TIME = 50;
     private AdView mAdView;
-
+    private Switch ICMP;
+    public static boolean isICMP = true;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,6 +118,18 @@ public class MainActivity extends Activity implements CompoundButton.OnCheckedCh
         final PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         this.wakeLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "Lock");
         this.wakeLock.acquire();
+        ICMP = (Switch) findViewById(R.id.switchICMP);
+        ICMP.setChecked(true);
+        ICMP.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    isICMP = true;
+                }else{
+                    isICMP = false;
+                }
+            }
+        });
         getIPButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

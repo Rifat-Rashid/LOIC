@@ -296,4 +296,14 @@
         android:layout_alignEnd="@+id/textView"
         android:textColor="#d2d2d2" />
 
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ICMP Mode"
+        android:id="@+id/switchICMP"
+        android:layout_below="@+id/httpButton"
+        android:layout_centerHorizontal="true"
+        android:textColor="#d2d2d2"
+        android:checked="true" />
+
 </RelativeLayout>

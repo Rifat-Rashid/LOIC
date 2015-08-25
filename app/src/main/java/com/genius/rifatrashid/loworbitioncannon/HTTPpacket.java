@@ -42,6 +42,11 @@ public class HTTPpacket implements Runnable {
                 sock.close();
                 count++;
                 Thread.sleep(50);
+                if(MainActivity.isICMP){
+
+                }else {
+                    break;
+                }
             }catch (Exception io){
                 io.printStackTrace();
             }

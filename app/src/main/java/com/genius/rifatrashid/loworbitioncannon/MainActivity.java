@@ -118,6 +118,7 @@ public class MainActivity extends Activity implements CompoundButton.OnCheckedCh
         final PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         this.wakeLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "Lock");
         this.wakeLock.acquire();
+        //
         ICMP = (Switch) findViewById(R.id.switchICMP);
         ICMP.setChecked(true);
         ICMP.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

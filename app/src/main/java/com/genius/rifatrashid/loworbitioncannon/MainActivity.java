@@ -74,21 +74,24 @@ public class MainActivity extends Activity implements CompoundButton.OnCheckedCh
         }
         */
         //
-
+/*
         Runnable r = new Runnable() {
             @Override
             public void run() {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                    */
                         mAdView = (AdView) findViewById(R.id.adView);
                         AdRequest adRequest = new AdRequest.Builder().build();
                         mAdView.loadAd(adRequest);
+        /*
                     }
                 });
             }
         };
         new Thread(r).start();
+        */
         //
         urlText = (EditText) findViewById(R.id.url_textbox);
         portText = (EditText) findViewById(R.id.port_textbox);
@@ -327,6 +330,7 @@ public class MainActivity extends Activity implements CompoundButton.OnCheckedCh
         }
         super.onDestroy();
         services.stop();
+        this.wakeLock.release();
     }
 
     @Override
@@ -335,6 +339,7 @@ public class MainActivity extends Activity implements CompoundButton.OnCheckedCh
             mAdView.pause();
         }
         super.onPause();
+        this.wakeLock.release();
     }
 
     @Override
@@ -343,6 +348,7 @@ public class MainActivity extends Activity implements CompoundButton.OnCheckedCh
         if (mAdView != null) {
             mAdView.resume();
         }
+        this.wakeLock.acquire();
     }
 
     @Override

@@ -1,14 +1,10 @@
 package com.genius.rifatrashid.loworbitioncannon;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.StrictMode;
-import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -60,6 +56,7 @@ public class MainActivity extends Activity implements CompoundButton.OnCheckedCh
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         //User Agreement
+        /*
         final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         if (preferences.getBoolean("startMessage", true)) {
             new AlertDialog.Builder(this).setTitle("Terms of Use").setMessage("Low Orbit Ion Cannon (LOIC) is a tool that was designed purley for stress testing networks. The developer assumes no responsibility for any illegal or unintended use of this tool. Enjoy :)").setPositiveButton("Accept", new DialogInterface.OnClickListener() {
@@ -75,6 +72,7 @@ public class MainActivity extends Activity implements CompoundButton.OnCheckedCh
             }).show();
 
         }
+        */
         //
 
         Runnable r = new Runnable() {
